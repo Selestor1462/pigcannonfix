@@ -8,10 +8,9 @@
         "Selestor"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "sources": "https://github.com/Selestor1462/pigcannonfix"
     },
-    "license": "CC0-1.0",
+    "license": "MIT",
     "icon": "assets/pigcannonfix/icon.png",
     "environment": "*",
     "mixins": [

@@ -24,7 +24,7 @@ To compile the mod yourself:
 
 ```bash
 # Clone the repository
-git clone [https://github.com/Selestor1462/pigcannonfix.git](https://github.com/Selestor1462/pigcannonfix.git)
+git clone https://github.com/Selestor1462/pigcannonfix.git
 cd pigcannonfix
 
 # Build the mod
