@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.Selestor.PigCannonFix.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "refmap": "pigcannonfix-refmap.json",
+  "mixins": [
+    "LivingEntityLazyPickupMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

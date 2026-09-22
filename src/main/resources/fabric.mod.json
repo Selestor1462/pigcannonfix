@@ -1,0 +1,26 @@
+{
+    "schemaVersion": 1,
+    "id": "pigcannonfix",
+    "version": "${version}",
+    "name": "Pig Cannon Fix",
+    "description": "Restores snapshot 9 lazy chunk mob pickup behavior.",
+    "authors": [
+        "Selestor"
+    ],
+    "contact": {
+        "homepage": "https://fabricmc.net/",
+        "sources": "https://github.com/FabricMC/fabric-example-mod"
+    },
+    "license": "CC0-1.0",
+    "icon": "assets/pigcannonfix/icon.png",
+    "environment": "*",
+    "mixins": [
+        "pigcannonfix.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.19.5",
+        "minecraft": "~26.3",
+        "java": ">=25",
+        "fabric-api": "*"
+    }
+}
