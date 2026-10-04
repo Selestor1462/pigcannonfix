@@ -1,5 +1,6 @@
 package net.Selestor.PigCannonFix.mixin;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,55 +11,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityLazyPickupMixin {
 
-    @Inject(
-        method = {
-            "canInteractWithLevel",
-            "canInteractWithWorld",
-            "m_321151_",
-            "method_60971"
-        },
-        at = @At("HEAD"),
-        cancellable = true,
-        require = 0
-    )
-    private void allowLazyChunkInteract(CallbackInfoReturnable<Boolean> cir) {
-        LivingEntity self = (LivingEntity) (Object) this;
-        if (!self.isRemoved()) {
-            cir.setReturnValue(true);
-        }
+    private static boolean pigCannonFix$isLazy(LivingEntity entity) {
+        return !entity.isAlwaysTicking()
+            && entity.level() instanceof ServerLevel level
+            && !level.isPositionEntityTicking(entity.blockPosition());
     }
 
     @Inject(
-        method = {
-            "isPushable",
-            "isCollidable",
-            "m_6094_",
-            "method_5863"
-        },
+        method = "isPushable",
         at = @At("HEAD"),
         cancellable = true,
-        require = 0
+        require = 1
     )
-    private void forcePushableInLazyChunks(CallbackInfoReturnable<Boolean> cir) {
+    private void pigCannonFix$restoreLazyChunkPushability(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
-        if (!self.isRemoved() && !self.isSpectator()) {
-            cir.setReturnValue(true);
-        }
-    }
-
-    @Inject(
-        method = {
-            "canBeRidden",
-            "m_6060_",
-            "method_5863"
-        },
-        at = @At("HEAD"),
-        cancellable = true,
-        require = 0
-    )
-    private void allowLazyCanBeRidden(Entity vehicle, CallbackInfoReturnable<Boolean> cir) {
-        LivingEntity self = (LivingEntity) (Object) this;
-        if (!self.isRemoved()) {
+        if (pigCannonFix$isLazy(self)
+            && !self.isRemoved()
+            && !self.isSpectator()
+            && !self.onClimbable()) {
             cir.setReturnValue(true);
         }
     }
